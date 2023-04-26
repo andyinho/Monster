@@ -8,6 +8,7 @@ let chosenMaxLife = 100;
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let healBtnCount = HEAL_COUNT;
+let hasBonusLife = true;
 
 adjustHealthBars(chosenMaxLife);
 
@@ -20,10 +21,21 @@ function attackMonster(mode) {
     maxDamage = STRONG_ATTACK_VALUE;
   }
 
+  const intialPlayerHealth = currentPlayerHealth;
+
   const monsterDamage = dealMonsterDamage(maxDamage);
   const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
   currentMonsterHealth -= monsterDamage;
   currentPlayerHealth -= playerDamage;
+
+  if (currentPlayerHealth <= 0 && hasBonusLife) {
+    hasBonusLife = false;
+    removeBonusLife();
+    currentPlayerHealth = intialPlayerHealth;
+    alert('The bonus life has saved you!');
+    setPlayerHealth(intialPlayerHealth);
+  }
+
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
     alert('You won!');
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
@@ -42,10 +54,18 @@ function strongAttackHandler() {
 }
 
 function healPLayerHandler() {
-  if (healBtnCount <= 0) {
-    increasePlayerHealth(HEAL_INCREASE);
+  let healValue;
+  if (currentPlayerHealth >= chosenMaxLife - HEAL_INCREASE) {
+    alert("You can't heal more than your max initial health");
+    healValue = chosenMaxLife - currentPlayerHealth;
+  } else {
+    healValue = HEAL_INCREASE;
+  }
+  if (healBtnCount <= 1) {
+    increasePlayerHealth(healValue);
+    currentPlayerHealth += healValue;
     console.log(healBtnCount);
-  } else if (healBtnCount >= 1) {
+  } else if (healBtnCount >= 2) {
     alert('You have used all your heal abilities!');
     console.log(healBtnCount);
   }
