@@ -39,6 +39,23 @@ function removeBonusLife() {
   bonusLifeEl.parentNode.removeChild(bonusLifeEl);
 }
 
+function addBonusLife() {
+  const bonusLifeEl = document.getElementById('bonus-life');
+
+  if (!bonusLifeEl) {
+    const newBonusLifeEl = document.createElement('span');
+    newBonusLifeEl.setAttribute('id', 'bonus-life');
+    newBonusLifeEl.textContent = '1';
+
+    const playerHealthEl = document.querySelector(
+      '#health-levels h2:last-of-type'
+    );
+    playerHealthEl.appendChild(newBonusLifeEl);
+  } else {
+    bonusLifeEl.textContent = '1';
+  }
+}
+
 function setPlayerHealth(health) {
   playerHealthBar.value = health;
 }

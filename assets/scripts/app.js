@@ -27,10 +27,27 @@ function endRound() {
 
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
     alert('You won!');
+    restartGame();
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
     alert('You lost!');
+    restartGame();
   } else if (currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
     alert("It's a tie!");
+    restartGame();
+  }
+}
+
+function restartGame() {
+  if (
+    (currentPlayerHealth <= 0 && !hasBonusLife) ||
+    currentMonsterHealth <= 0
+  ) {
+    resetGame(chosenMaxLife);
+    currentMonsterHealth = chosenMaxLife;
+    currentPlayerHealth = chosenMaxLife;
+    healBtnCount = 0;
+    addBonusLife();
+    alert('Game has reset');
   }
 }
 
