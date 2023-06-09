@@ -181,15 +181,14 @@ function healPLayerHandler() {
 }
 
 function printLogHandler() {
-  // for (let i = 0; i < battleLog.length; i++) {
-  //   console.log(battleLog[i]);
-  // }
-  // for (const logEntry of battleLog) {
-  //   console.log(logEntry);
-  // }
-  const theBattleLog = battleLog.forEach((element) => {
-    console.log(element);
-  });
+  let i = 0;
+  for (const logEntry of battleLog) {
+    console.log(`Log: ${i}`);
+    for (const key in logEntry) {
+      console.log(`${key}: ${logEntry[key]}`);
+    }
+    i++;
+  }
 }
 
 attackBtn.addEventListener('click', attackHandler);
