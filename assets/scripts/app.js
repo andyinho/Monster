@@ -210,4 +210,4 @@ strongAttackBtn.addEventListener('click', strongAttackHandler);
 healBtn.addEventListener('click', healPLayerHandler);
 logBtn.addEventListener('click', printLogHandler);
 
-// test push!
+// test push removed
